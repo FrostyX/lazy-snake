@@ -1,4 +1,36 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Hi, {{ title }}!</h1>
+    <h1>Lazy Snake</h1>
+
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ncalls</th>
+					<th>tottime</th>
+					<th>percall</th>
+					<th>cumtime</th>
+					<th>percall</th>
+					<th>filename</th>
+					<th>line</th>
+					<th>function</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for stat in stats %}
+				<tr>
+					<td>{{ stat.ncalls }}</td>
+					<td>{{ stat.tottime }}</td>
+					<td>{{ stat.tottime_percall }}</td>
+					<td>{{ stat.cumtime }}</td>
+					<td>{{ stat.cumtime_percall }}</td>
+					<td>{{ stat.filename }}</td>
+					<td>{{ stat.line }}</td>
+					<td>{{ stat.function }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
 {% endblock %}
