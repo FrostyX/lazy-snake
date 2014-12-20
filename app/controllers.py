@@ -2,6 +2,7 @@ import os
 from app import app
 from flask import render_template, request, redirect, url_for
 from app.config import UPLOAD_DIR
+from app.models import Hash
 from app.models.CPythonParser import CPythonParser
 from app.models.Stats import parameters
 from app.tests.test_CPythonParser import input
@@ -17,8 +18,24 @@ def get_home():
 @app.route('/', methods=["POST"])
 def post_home():
 	file = request.files["result"]
-	file.save(os.path.join(RESULTS_DIR, "FOOBAR"))
-	return redirect("/")
+	name = Hash.make()
+	file.save(os.path.join(RESULTS_DIR, name))
+	return redirect("/result/" + name)
+
+
+@app.route('/result/<name>/')
+@app.route('/result/<name>/<sort>/')
+@app.route('/result/<name>/<sort>/<direction>/')
+def get_result(name, sort="cumtime", direction="asc"):
+	stats = CPythonParser().parse(input)
+
+	return render_template('profile.html',
+	   controller = "result/" + name,
+	   stats=stats,
+	   parameters=parameters,
+	   sort=sort,
+	   direction=(direction == "desc")
+	)
 
 
 @app.route('/demo')
