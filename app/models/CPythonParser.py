@@ -14,7 +14,7 @@ class CPythonParser(object):
 			filename_line_function =  not (l[5].startswith("{") and l[-1].endswith("}"))
 
 			stats.append({
-				"ncalls": int(l[0]),
+				"ncalls": int(l[0].split("/")[0]),
 				"tottime": float(l[1]),
 				"tottime_percall": float(l[2]),
 				"cumtime": float(l[3]),
