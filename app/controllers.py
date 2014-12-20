@@ -5,8 +5,8 @@ from app.models.Stats import parameters
 from app.tests.test_CPythonParser import input
 
 @app.route('/')
-@app.route('/<sort>')
-@app.route('/<sort>/<direction>')
+@app.route('/<sort>/')
+@app.route('/<sort>/<direction>/')
 def get_home(sort="cumtime", direction="asc"):
 	stats = CPythonParser().parse(input)
 
@@ -18,10 +18,10 @@ def get_home(sort="cumtime", direction="asc"):
 	    direction=(direction == "desc")
 	)
 
-@app.route('/about')
+@app.route('/about/')
 def get_about():
 	return render_template('about.html')
 
-@app.route('/feedback')
+@app.route('/feedback/')
 def get_feedback():
 	return render_template('feedback.html')
