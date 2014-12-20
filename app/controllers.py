@@ -4,13 +4,14 @@ from app.models.CPythonParser import CPythonParser
 from app.models.Stats import parameters
 from app.tests.test_CPythonParser import input
 
-@app.route('/')
-@app.route('/<sort>/')
-@app.route('/<sort>/<direction>/')
-def get_home(sort="cumtime", direction="asc"):
+@app.route('/demo')
+@app.route('/demo/<sort>/')
+@app.route('/demo/<sort>/<direction>/')
+def get_demo(sort="cumtime", direction="asc"):
 	stats = CPythonParser().parse(input)
 
-	return render_template('home.html',
+	return render_template('profile.html',
+	    controller = "demo",
 	    stats=stats,
 	    parameters=parameters,
 	    sort=sort,
