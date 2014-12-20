@@ -1,6 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
-    <h1>Lazy Snake</h1>
+
+	<div class="btn-group navbar-right">
+		<a href="/#post" class="btn btn-default"><i class="fa fa-plus-square-o"></i> New</a>
+		{% if controller != "demo" %}
+			<a href="/delete/{{ name }}" class="btn btn-default"><i class="fa fa-trash-o"></i> Delete</a>
+		{% endif %}
+	</div>
+
+	<h1>Lazy Snake</h1>
 
 	<div class="table-responsive">
 		<table class="table table-striped">

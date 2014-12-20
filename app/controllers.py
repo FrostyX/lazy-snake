@@ -33,6 +33,7 @@ def get_result(name, sort="cumtime", direction="asc"):
 	stats = CPythonParser().parse(f.read())
 
 	return render_template('profile.html',
+	   name=name,
 	   controller = "result/" + name,
 	   stats=stats,
 	   parameters=parameters,
@@ -54,6 +55,12 @@ def get_demo(sort="cumtime", direction="asc"):
 	    sort=sort,
 	    direction=(direction == "desc")
 	)
+
+
+@app.route('/delete/<name>/')
+def get_delete(name):
+	os.remove(RESULTS_DIR + "/" + name);
+	return redirect("/")
 
 
 @app.route('/about/')
