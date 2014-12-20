@@ -1,0 +1,31 @@
+#!/usr/bin/python
+
+import StringIO
+import subprocess
+import requests
+from sys import argv
+
+
+URL = "http://127.0.0.1:5000/"
+
+
+def render_help():
+	print "Lazy Snake"
+	print "  A terminal client for web based python profiler"
+	print ""
+	print "  Usage:"
+	print "    lazy-snake path/to/some/script.py"
+
+
+def main(script):
+	process = subprocess.Popen(["python", "-m", "cProfile", script], stdout=subprocess.PIPE)
+	out = process.communicate()[0]
+	f = StringIO.StringIO(out)
+	r = requests.post(URL, files={"result": f})
+
+	print "Lazy Snake"
+	print "  Analyze your result at: " + r.url
+
+
+if __name__ == "__main__":
+	main(argv[1]) if(len(argv) > 1) else render_help()
