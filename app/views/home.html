@@ -8,6 +8,7 @@
 				<tr>
 					{% for param in parameters %}
 						<th>
+							{% set getattr = getattr %}
 							{% set order = "desc" if (param["name"] == sort and not direction) else "" %}
 							<a href="/{{ param['name'] }}/{{ order }}" title="{{ param['description'] }}">
 								{{ param["label"] if "label" in param else param["name"] }}

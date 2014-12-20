@@ -13,7 +13,6 @@ def get_home(sort="cumtime", direction="asc"):
 	return render_template('home.html',
 	    stats=stats,
 	    parameters=parameters,
-	    getattr=getattr,
 	    sort=sort,
 	    direction=(direction == "desc")
 	)
