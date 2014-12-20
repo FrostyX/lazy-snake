@@ -1,6 +1,7 @@
 from app import app
 from flask import render_template
 from app.models.CPythonParser import CPythonParser
+from app.models.Stats import parameters
 from app.tests.test_CPythonParser import input
 
 @app.route('/')
@@ -11,6 +12,8 @@ def get_home(sort="cumtime", direction="asc"):
 
 	return render_template('home.html',
 	    stats=stats,
+	    parameters=parameters,
+	    getattr=getattr,
 	    sort=sort,
 	    direction=(direction == "desc")
 	)
