@@ -1,13 +1,11 @@
 import os
 from app import app
 from flask import render_template, request, redirect, url_for, flash
-from app.config import UPLOAD_DIR
+from app.config import RESULTS_DIR
 from app.models import Hash
 from app.models.CPythonParser import CPythonParser
 from app.models.Stats import parameters
 from app.tests.test_CPythonParser import input
-
-RESULTS_DIR = UPLOAD_DIR + "results"
 
 
 @app.route('/', methods=["GET"])
