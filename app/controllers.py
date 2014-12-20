@@ -4,10 +4,16 @@ from app.models.CPythonParser import CPythonParser
 from app.tests.test_CPythonParser import input
 
 @app.route('/')
-@app.route('/home')
-def get_home():
+@app.route('/<sort>')
+@app.route('/<sort>/<direction>')
+def get_home(sort="cumtime", direction="asc"):
 	stats = CPythonParser().parse(input)
-	return render_template('home.html', stats=stats)
+
+	return render_template('home.html',
+	    stats=stats,
+	    sort=sort,
+	    direction=(direction == "desc")
+	)
 
 @app.route('/about')
 def get_about():

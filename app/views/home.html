@@ -17,7 +17,7 @@
 				</tr>
 			</thead>
 			<tbody>
-				{% for stat in stats %}
+				{% for stat in stats|sort(attribute=sort, reverse=direction) %}
 				<tr>
 					<td>{{ stat.ncalls }}</td>
 					<td>{{ stat.tottime }}</td>
