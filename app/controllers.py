@@ -1,6 +1,6 @@
 import os
 from app import app
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
 from app.config import UPLOAD_DIR
 from app.models import Hash
 from app.models.CPythonParser import CPythonParser
@@ -18,6 +18,10 @@ def get_home():
 @app.route('/', methods=["POST"])
 def post_home():
 	file = request.files["result"]
+	if not file:
+		flash("Please post your profiler result via file or url")
+		return redirect("/")
+
 	name = Hash.make()
 	file.save(os.path.join(RESULTS_DIR, name))
 	return redirect("/result/" + name)
