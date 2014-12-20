@@ -29,7 +29,8 @@ def post_home():
 @app.route('/result/<name>/<sort>/')
 @app.route('/result/<name>/<sort>/<direction>/')
 def get_result(name, sort="cumtime", direction="asc"):
-	stats = CPythonParser().parse(input)
+	f = open(RESULTS_DIR + "/" + name, "r")
+	stats = CPythonParser().parse(f.read())
 
 	return render_template('profile.html',
 	   controller = "result/" + name,
