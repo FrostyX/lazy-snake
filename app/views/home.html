@@ -7,7 +7,15 @@
 			<thead>
 				<tr>
 					{% for param in parameters %}
-						<th><a href="/{{ param['name'] }}" title="{{ param['description'] }}">{{ param["label"] if "label" in param else param["name"] }}</a></th>
+						<th>
+							{% set order = "desc" if (param["name"] == sort and not direction) else "" %}
+							<a href="/{{ param['name'] }}/{{ order }}" title="{{ param['description'] }}">
+								{{ param["label"] if "label" in param else param["name"] }}
+							</a>
+							{% if param["name"] == sort %}
+								<i class="fa fa-caret-{{ 'down' if direction else 'up' }} text-muted"></i>
+							{% endif %}
+						</th>
 					{% endfor %}
 				</tr>
 			</thead>
