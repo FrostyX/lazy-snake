@@ -4,6 +4,10 @@ from app.models.CPythonParser import CPythonParser
 from app.models.Stats import parameters
 from app.tests.test_CPythonParser import input
 
+@app.route('/')
+def get_home():
+	return render_template("home.html")
+
 @app.route('/demo')
 @app.route('/demo/<sort>/')
 @app.route('/demo/<sort>/<direction>/')
