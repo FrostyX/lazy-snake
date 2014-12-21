@@ -6,7 +6,7 @@ html
 
 body
 {
-	margin-bottom: 60px;
+	margin-bottom: 80px;
 }
 
 #page
@@ -30,6 +30,11 @@ body
 h2 i
 {
 	font-size: 16pt !important;
+}
+
+hr
+{
+	padding-bottom: 10px;
 }
 
 ul.nav a:hover
