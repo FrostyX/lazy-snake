@@ -1,4 +1,5 @@
 import os
+import urllib2
 from app import app
 from flask import render_template, request, redirect, url_for, flash
 from app.config import RESULTS_DIR
@@ -15,14 +16,27 @@ def get_home():
 
 @app.route('/', methods=["POST"])
 def post_home():
-	file = request.files["result"]
-	if not file:
-		flash("Please post your profiler result via file or url")
-		return redirect("/")
+	print request.data
+	if "post_file" in request.values:
+		file = request.files["result"]
+		if not file:
+			flash("Please post your profiler result via file or url")
+			return redirect("/")
 
-	name = Hash.make()
-	file.save(os.path.join(RESULTS_DIR, name))
-	return redirect("/result/" + name)
+		name = Hash.make()
+		file.save(os.path.join(RESULTS_DIR, name))
+		return redirect("/result/" + name)
+
+	elif "post_url" in request.values:
+		url = request.values["url"]
+		response = urllib2.urlopen(url)
+		content = response.read()
+
+		name = Hash.make()
+		f = open(RESULTS_DIR + "/" + name, "w")
+		f.write(content)
+		f.close()
+		return redirect("/result/" + name)
 
 
 @app.route('/result/<name>/')
