@@ -10,6 +10,42 @@
 
 	<h1>Lazy Snake</h1>
 
+	{% macro chart(name, title, stats, sort) -%}
+		<script type="text/javascript">
+		$(function () {
+			$('#{{ name }}').highcharts({
+				chart: {type: 'bar'},
+				title: {text: '{{ title }}'},
+				credits: {enabled: false},
+				xAxis: {categories: []},
+				plotOptions: {bar: {dataLabels: {enabled: true}}, series: {show: ""}},
+				series: [{
+					name: "{{ name }}",
+					data: [
+						{% set ordered = stats|sort(attribute=sort, reverse=True) %}
+						{% for stat in ordered[:4] %}
+						['{{ stat["function"] }} ', {{ stat[sort]}}],
+						{% endfor %}
+					]
+				}]
+			});
+		});
+		</script>
+		<div id="{{ name }}" style="width: 330px; height: 250px"></div>
+	{%- endmacro %}
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5 pull-left">
+				{{ chart("chart-ncalls", "ncalls", stats, "ncalls") }}
+			</div>
+			<div class="col-md-5 pull-right">
+				{{ chart("chart-tottime", "tottime", stats, "tottime") }}
+			</div>
+		</div>
+	</div>
+
+
 	<div class="table-responsive">
 		<table class="table table-striped">
 			<thead>
