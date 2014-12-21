@@ -32,6 +32,8 @@
 		Input form
 	-->
 
+	<h2 id="post">Post you result</h2>
+
 	{% with messages = get_flashed_messages() %}
 		{% if messages %}
 			<div class="alert alert-danger" role="alert">
@@ -41,11 +43,40 @@
 		{% endif %}
 	{% endwith %}
 
-	<h2>Post you result</h2>
-	<form action="" method="post" enctype="multipart/form-data">
-		<input type="file" name="result">
-		<input type="submit" name="post" value="post">
-	</form>
+	<div class="row">
+		<div class="col-md-6">
+			<h4>Upload the file</h4>
+			<form action="" method="post" enctype="multipart/form-data">
+				<div class="input-group">
+					<input type="file" name="result" class="form-control">
+					<span class="input-group-btn">
+						<input name="post_file" type="submit" value="post" class="btn btn-default">
+					</span>
+				</div>
+			</form>
+		</div>
+
+		<div class="col-md-6">
+			<h4>Post URL to your result</h4>
+			<form action="" method="post">
+				<div class="input-group">
+					<input type="text" name="url" class="form-control">
+					<span class="input-group-btn">
+						<input name="post_url" type="submit" value="post" class="btn btn-default">
+					</span>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<br>
+	<p>Please <b>do not</b> paste binary files, but just the stdout from <code>python -m cProfile path/to/some/script.py</code>. When you are posting results via URL, please insert the URL to RAW file, not to some preview. Please see some examples:</p>
+
+<pre class="prettyprint"># Save result to file
+python -m cProfile script.py &gt; result.txt
+
+# Push result to bpaste.net
+python -m cProfile script.py |wgetpaste</pre>
 
 	<hr>
 
