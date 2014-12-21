@@ -16,27 +16,26 @@ def get_home():
 
 @app.route('/', methods=["POST"])
 def post_home():
-	print request.data
+	name = Hash.make()
+	r_ok = redirect("/result/" + name)
+
 	if "post_file" in request.values:
 		file = request.files["result"]
 		if not file:
 			flash("Please post your profiler result via file or url")
 			return redirect("/")
 
-		name = Hash.make()
 		file.save(os.path.join(RESULTS_DIR, name))
-		return redirect("/result/" + name)
+		return r_ok
 
 	elif "post_url" in request.values:
 		url = request.values["url"]
 		response = urllib2.urlopen(url)
 		content = response.read()
 
-		name = Hash.make()
-		f = open(RESULTS_DIR + "/" + name, "w")
-		f.write(content)
-		f.close()
-		return redirect("/result/" + name)
+		with open(RESULTS_DIR + "/" + name, "w") as f:
+			f.write(content)
+		return r_ok
 
 
 @app.route('/result/<name>/')
