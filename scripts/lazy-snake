@@ -23,8 +23,7 @@ def main(script):
 	f = StringIO.StringIO(out)
 	r = requests.post(URL, files={"result": f})
 
-	print "Lazy Snake"
-	print "  Analyze your result at: " + r.url
+	print "Your result can be analyzed here: " + r.url
 
 
 if __name__ == "__main__":
