@@ -1,6 +1,26 @@
 {% extends "layout.html" %}
 {% block content %}
-<h1>Lazy Snake</h1>
+
+	<div class="jumbotron">
+		<h1>Lazy Snake</h1>
+		<p class="lead text-muted">A web based, easy to use and nice looking python profiler. You can post your cProfile results via url, file or terminal client. See live <a href="/demo" title="Live demo">demo</a> to see what Lazy Snake provides to you.</p>
+	</div>
+
+	<div class="row">
+		<div class="col-md-4">
+			<h2><i class="fa fa-github text-muted"></i> Open Source</h2>
+			<p>It means you can get the whole the source code and do pretty much everything with it. Read it, rewrite it, share it. Everybody loves Open Source.</p>
+		</div>
+		<div class="col-md-4">
+			<h2><i class="fa fa-heart-o text-muted"></i> Python</h2>
+			<p>For Python written in Python. This essentially means, that if you want to use it, you would probably understand it's code. Hack it, patches are welcome.</p>
+		</div>
+		<div class="col-md-4">
+			<h2><i class="fa fa-cloud-download text-muted"></i> Run your own</h2>
+			<p>Don't wanna post your profiling results somewhere on the internet? Just run your own Snake's instance locally. Its a matter of few simple commands.</p>
+		</div>
+	</div>
+
 
 	{% with messages = get_flashed_messages() %}
 		{% if messages %}

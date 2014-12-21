@@ -19,6 +19,19 @@ body
 	width: auto;
 }
 
+.jumbotron
+{
+	padding-top: 0px;
+	padding-bottom: 10px;
+	text-align: center;
+	background-color: transparent;
+}
+
+h2 i
+{
+	font-size: 16pt !important;
+}
+
 ul.nav a:hover
 {
 	color: black !important;
