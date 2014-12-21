@@ -1,6 +1,10 @@
 {% extends "layout.html" %}
 {% block content %}
 
+	<!--
+		Head
+	-->
+
 	<div class="jumbotron">
 		<h1>Lazy Snake</h1>
 		<p class="lead text-muted">A web based, easy to use and nice looking python profiler. You can post your cProfile results via url, file or terminal client. See live <a href="/demo" title="Live demo">demo</a> to see what Lazy Snake provides to you.</p>
@@ -21,6 +25,12 @@
 		</div>
 	</div>
 
+	<hr>
+
+
+	<!--
+		Input form
+	-->
 
 	{% with messages = get_flashed_messages() %}
 		{% if messages %}
@@ -36,5 +46,24 @@
 		<input type="file" name="result">
 		<input type="submit" name="post" value="post">
 	</form>
+
+	<hr>
+
+
+	<!--
+		Terminal client
+	-->
+
+	<h3>Terminal client</h3>
+	<p>For frequent use, uploading profiler results manully, can be quite inconvenient. Its where terminal client comes handy. Easy to install, easy to use.</p>
+
+		{% block client_code %}{% endblock %}
+<pre class="prettyprint"># Install
+sudo pip install lazy-snake
+
+# Usage
+lazy-snake path/to/some/script.py</pre>
+
+	<p>The <code>lazy-snake</code> command will profile your script via cProfile send them to the server and provides you link to your result.</p>
 
 {% endblock %}
