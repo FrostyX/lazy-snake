@@ -57,7 +57,6 @@
 	<h3>Terminal client</h3>
 	<p>For frequent use, uploading profiler results manully, can be quite inconvenient. Its where terminal client comes handy. Easy to install, easy to use.</p>
 
-		{% block client_code %}{% endblock %}
 <pre class="prettyprint"># Install
 sudo pip install lazy-snake
 
@@ -65,5 +64,25 @@ sudo pip install lazy-snake
 lazy-snake path/to/some/script.py</pre>
 
 	<p>The <code>lazy-snake</code> command will profile your script via cProfile send them to the server and provides you link to your result.</p>
+
+	<hr>
+
+
+	<!--
+		Own server
+	-->
+
+	<h3>Own server</h3>
+	<p>As mentioned above, please feel free to run your own instance of Lazy Snake on your computer.</p>
+
+<pre class="prettyprint"># Install
+sudo pip install lazy-snake-server
+
+# Run
+lazy-snake-server
+
+# Tell client to use your server (optional)
+echo "URL = http://127.0.0.1:5000/" >> ~/.config/lazy-snake/client</pre>
+
 
 {% endblock %}
