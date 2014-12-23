@@ -21,7 +21,11 @@ def main(script):
 	process = subprocess.Popen(["python", "-m", "cProfile", script], stdout=subprocess.PIPE)
 	out = process.communicate()[0]
 	f = StringIO.StringIO(out)
-	r = requests.post(URL, files={"result": f})
+	r = requests.post(URL, files={"result": f}, data={"post_file": "post"})
+
+	if r.url == URL:
+		print "Some error occurred"
+		return
 
 	print "Your result can be analyzed here: " + r.url
 
