@@ -10,6 +10,39 @@
 
 	<h1>Lazy Snake</h1>
 
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					{% for param in parameters %}
+						<th>
+							{% set getattr = getattr %}
+							{% set order = "desc" if (param["name"] == sort and not direction) else "" %}
+							<a href="/{{ controller }}/{{ param['name'] }}/{{ order }}" title="{{ param['description'] }}">
+								{{ param["label"] if "label" in param else param["name"] }}
+							</a>
+							{% if param["name"] == sort %}
+								<i class="fa fa-caret-{{ 'down' if direction else 'up' }} text-muted"></i>
+							{% endif %}
+						</th>
+					{% endfor %}
+				</tr>
+			</thead>
+			<tbody>
+				{% for stat in stats|sort(attribute=sort, reverse=direction) %}
+				<tr>
+					{% for param in parameters %}
+					<td>{{ stat[param["name"]] }}</td>
+					{% endfor %}
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+
+	<hr />
+	<h2>Graphs</h2>
+
 	{% macro chart(name, title, stats, sort) -%}
 		<script type="text/javascript">
 		$(function () {
@@ -43,37 +76,6 @@
 				{{ chart("chart-tottime", "tottime", stats, "tottime") }}
 			</div>
 		</div>
-	</div>
-
-
-	<div class="table-responsive">
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					{% for param in parameters %}
-						<th>
-							{% set getattr = getattr %}
-							{% set order = "desc" if (param["name"] == sort and not direction) else "" %}
-							<a href="/{{ controller }}/{{ param['name'] }}/{{ order }}" title="{{ param['description'] }}">
-								{{ param["label"] if "label" in param else param["name"] }}
-							</a>
-							{% if param["name"] == sort %}
-								<i class="fa fa-caret-{{ 'down' if direction else 'up' }} text-muted"></i>
-							{% endif %}
-						</th>
-					{% endfor %}
-				</tr>
-			</thead>
-			<tbody>
-				{% for stat in stats|sort(attribute=sort, reverse=direction) %}
-				<tr>
-					{% for param in parameters %}
-					<td>{{ stat[param["name"]] }}</td>
-					{% endfor %}
-				</tr>
-				{% endfor %}
-			</tbody>
-		</table>
 	</div>
 
 {% endblock %}
