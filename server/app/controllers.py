@@ -1,12 +1,12 @@
 import os
 import urllib2
-from app import app
+from . import app
 from flask import render_template, request, redirect, url_for, flash
-from app.config import RESULTS_DIR
-from app.models import Hash
-from app.models.CPythonParser import CPythonParser
-from app.models.Stats import parameters
-from app.tests.test_CPythonParser import input
+from config import RESULTS_DIR
+from models import Hash
+from models.CPythonParser import CPythonParser
+from models.Stats import parameters
+from tests.test_CPythonParser import input
 
 
 @app.route('/', methods=["GET"])
