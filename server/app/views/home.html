@@ -88,7 +88,10 @@ python -m cProfile script.py |wgetpaste</pre>
 	<h3>Terminal client</h3>
 	<p>For frequent use, uploading profiler results manully, can be quite inconvenient. Its where terminal client comes handy. Easy to install, easy to use.</p>
 
-<pre class="prettyprint"># Install
+<pre class="prettyprint"># First you should install dependencies
+sudo dnf install python-requests
+
+# Install
 sudo wget -P /usr/local/bin/ https://raw.githubusercontent.com/FrostyX/lazy-snake/master/cli/lazy-snake
 sudo chmod +x /usr/local/bin/lazy-snake
 
@@ -107,7 +110,10 @@ lazy-snake path/to/some/script.py</pre>
 	<h3>Own server</h3>
 	<p>As mentioned above, please feel free to run your own instance of Lazy Snake on your computer.</p>
 
-<pre class="prettyprint"># Install
+<pre class="prettyprint"># First you should install dependencies
+sudo dnf install python-flask
+
+# Install
 git clone https://github.com/FrostyX/lazy-snake.git
 sudo ln -s $(pwd)/lazy-snake/server/main.py /usr/local/bin/lazy-snake-server
 
