@@ -115,7 +115,8 @@ sudo ln -s $(pwd)/lazy-snake/server/main.py /usr/local/bin/lazy-snake-server
 lazy-snake-server
 
 # Tell client to use your server (optional)
-echo "URL = http://127.0.0.1:5000/" >> ~/.config/lazy-snake/client</pre>
+mkdir ~/.config/lazy-snake
+echo "URL = http://127.0.0.1:5000/" > ~/.config/lazy-snake/client</pre>
 
 
 {% endblock %}

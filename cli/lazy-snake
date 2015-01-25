@@ -4,9 +4,19 @@ import StringIO
 import subprocess
 import requests
 from sys import argv
+from os.path import expanduser
 
 
-URL = "http://127.0.0.1:5000/"
+CONFIG = expanduser("~") + "/.config/lazy-snake/client"
+URL = "http://lazysnake-frostyx.rhcloud.com/"
+try:
+	f = open(CONFIG, "r")
+	line = f.readline()
+	if line.startswith("URL"):
+		URL = line[3:].strip()[1:].strip()
+	f.close()
+except IOError:
+	pass
 
 
 def render_help():
@@ -21,13 +31,16 @@ def main(script):
 	process = subprocess.Popen(["python", "-m", "cProfile", script], stdout=subprocess.PIPE)
 	out = process.communicate()[0]
 	f = StringIO.StringIO(out)
-	r = requests.post(URL, files={"result": f}, data={"post_file": "post"})
 
-	if r.url == URL:
-		print "Some error occurred"
-		return
+	try:
+		r = requests.post(URL, files={"result": f}, data={"post_file": "post"})
+		if r.url == URL:
+			print "Some error occurred"
+			return
+		print "Your result can be analyzed here: " + r.url
 
-	print "Your result can be analyzed here: " + r.url
+	except requests.exceptions.ConnectionError:
+		print "Could not connect to server"
 
 
 if __name__ == "__main__":
