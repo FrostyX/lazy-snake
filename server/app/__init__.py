@@ -7,4 +7,4 @@ app = Flask("lazy-snake",
 	template_folder=here+"/views",
 	static_folder=here+"/../static"
 )
-app.secret_key = "jklpuzo"
+app.secret_key = os.environ.get("OPENSHIFT_SECRET_TOKEN", "jklpuzo")
